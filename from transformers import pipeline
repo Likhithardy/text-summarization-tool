@@ -1,0 +1,24 @@
+from transformers import pipeline
+
+summarizer = pipeline("summarization", model="sshleifer/distilbart-cnn-12-6")
+
+input_text = """
+Artificial Intelligence (AI) is the simulation of human intelligence processes by machines, especially computer systems. 
+These processes include learning, reasoning, and self-correction. Applications of AI include expert systems, natural 
+language processing (NLP), speech recognition, and machine vision.
+The field of AI research was founded on the claim that human intelligence "can be so precisely described that a 
+machine can be made to simulate it." AI has become an essential part of the technology industry, helping solve
+problems in data analysis, healthcare,finance, robotics, and autonomous vehicles.Modern AI often involves 
+machine learning (ML), where systems learn from data to improve performance over time.
+Deep learning, a subfield of ML, uses neural networks with many layers to model complex patterns in data.
+Ethical concerns about AI include bias in algorithms, job displacement, and decision-making transparency.
+ As AI continues to evolve, it's critical to ensure that these systems are developed and deployed responsibly.
+Artificial Intelligence is not just a tool—it’s a transformation that challenges how we think, work, and live.
+
+"""
+
+summary = summarizer(input_text, max_length=60, min_length=30, do_sample=False)
+
+print("\n--- Summary ---\n")
+
+print(summary[0]['summary_text'])
